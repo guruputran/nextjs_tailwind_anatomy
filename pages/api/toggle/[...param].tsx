@@ -10,7 +10,7 @@ async function handler(req: any, resp: any){
          $set: { done: req.query.param[1] } 
       };
 
-    const client = await MongoClient.connect("mongo db connection string")
+    const client = await MongoClient.connect(`${process.env.MONGO_URI}`)
     const db = client.db()
     const collection = db.collection("todos")
     const result = await collection.updateOne(query, updateTodo, options);

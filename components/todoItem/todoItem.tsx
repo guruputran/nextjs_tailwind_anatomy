@@ -31,7 +31,7 @@ function TodoItem(props: any) {
         router.push("/")
     }
     
-
+ 
     return (
         <Fragment>
             <td className="py-5 font-bold text-blue-600">{heading}</td>

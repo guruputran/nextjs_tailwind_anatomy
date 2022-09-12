@@ -9,7 +9,7 @@ async function handler(req: any, resp: any){
 
     if(!heading || !description) return
     
-    const client = await MongoClient.connect("mongo connection string")
+    const client = await MongoClient.connect(`${process.env.MONGO_URI}`)
     const db = client.db()
     const collection = db.collection("todos")
     const result = await collection.insertOne({heading, description, done})

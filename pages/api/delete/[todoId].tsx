@@ -4,12 +4,14 @@ async function handler(req: any, resp: any){
     
     const {todoId} = req.query
 
+    console.log("the query was:", todoId)
+
     if(req.method !== 'DELETE') return
     
-    const client = await MongoClient.connect("mongo connection string")
+    const client = await MongoClient.connect(`${process.env.MONGO_URI}`)
     const db = client.db()
     const collection = db.collection("todos")
-    const result = await (await collection.deleteOne({_id: new ObjectId(todoId)})).deletedCount;
+    const result = (await collection.deleteOne({_id: new ObjectId(todoId)})).deletedCount;
     client.close()
 
     console.log("deleted count::::"+result)
@@ -20,4 +22,4 @@ async function handler(req: any, resp: any){
     })
 }
 
-export default handler
+export default handler 
